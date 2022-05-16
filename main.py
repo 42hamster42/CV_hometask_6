@@ -108,6 +108,9 @@ def check_by_stats(stats, th_area_upper, th_area_lower, idx):
     ar = stats[cv2.CC_STAT_HEIGHT] / stats[cv2.CC_STAT_WIDTH]
     if ar < 0.74 or ar > 1.28:
         return False
+    rect_area = stats[cv2.CC_STAT_HEIGHT] * stats[cv2.CC_STAT_WIDTH]
+    if stats[cv2.CC_STAT_AREA] < (rect_area - 5):
+        return False
     return True
 
 
@@ -191,7 +194,7 @@ def process_image(im, dbg_name=None):
 
 def process_dir(path):
     files = os.listdir(path)
-    output_dir = 'output7'
+    output_dir = 'output2'
     try:
         os.mkdir(output_dir)
     except:
@@ -206,7 +209,7 @@ def process_dir(path):
 
 
 def main():
-    process_dir('TestSet1')
+    process_dir('TestSet2')
 
 
 if __name__ == '__main__':
